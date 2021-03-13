@@ -1,8 +1,14 @@
-<h1>Posts</h1>
+<h1>Clubhouse</h1>
+<h2>Posts</h2>
 <% @posts.each do |post| %>
   <article class="post">
-    <p id="username">Christopher</p>
-    <p><%= post.message %> | <%= link_to "link", post_path(post) %></p>
+    <% if user_signed_in? %>
+      <p id="username">@<%= post.user.username %></p>
+    <% else %>
+      <p id="username" class="hidden-text">@<%= '*' * post.user.username.length %></p>
+    <% end %>
+    <p><%= post.message %></p>
+    <p><%= link_to "link", post_path(post) %></p>
   </article>
 <% end %>
 
